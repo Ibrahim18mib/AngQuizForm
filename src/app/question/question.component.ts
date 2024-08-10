@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { QuestionService } from '../services/question.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { interval } from 'rxjs';
+import { interval, Subscription } from 'rxjs';
 import { ChangeBgDirective } from '../change-bg.directive';
 
 @Component({
@@ -19,7 +19,7 @@ export class QuestionComponent implements OnInit {
   counter = 60;
   progress: string = '0';
 
-  interval$: any;
+  interval$!: Subscription;
 
   correctAnswer = 0;
   IncorrectAnswer = 0;
@@ -83,7 +83,6 @@ export class QuestionComponent implements OnInit {
       if (this.counter === 0) {
         this.currentQuestion++;
         this.counter = 60;
-        this.points -= 10;
       }
     });
     setTimeout(() => {
@@ -92,13 +91,13 @@ export class QuestionComponent implements OnInit {
   }
 
   stopCounter() {
-    // this.interval$.unsubscibe();
+    this.interval$?.unsubscribe();
     this.counter = 60;
   }
 
   resetCounter() {
     this.stopCounter();
-    this.counter = 60;
+    // this.counter = 60;
     this.startCounter();
   }
 
