@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "deploy:gh": "ng build --prod --base-href='https://Ibrahim18mib.github.io/AngQuizForm/' && ngh",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
